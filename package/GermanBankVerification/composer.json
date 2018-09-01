@@ -1,0 +1,26 @@
+{
+    "name": "prodevelopement/germanbankverification",
+    "description": "This package Integrates API For German Bank Verification like IBAN, KTO, BLZ, Bank and also can be used as a library for further development",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ProDevelopement",
+            "email": "dev@pro-developement.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ProDevelopement\\GermanBankVerification\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ProDevelopement\\GermanBankVerification\\GBVServiceProvider"
+            ]
+        }
+    }
+}
