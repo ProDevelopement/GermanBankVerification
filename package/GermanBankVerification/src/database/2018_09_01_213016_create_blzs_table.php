@@ -16,17 +16,18 @@ class CreateBlzsTable extends Migration
     {
         Schema::create('blzs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Bankleitzahl');
-            $table->string('Merkmal');
-            $table->string('Bezeichnung');
-            $table->string('PLZ');
-            $table->string('Ort');
-            $table->string('Kurzbezeichnung');
-            $table->string('Prüfziffer-berechnungs-methode');
-            $table->string('Datensatz-nummer');
-            $table->string('Änderungs-kennzeichen');
-            $table->string('Bankleitzahl-löschung');
-            $table->string('Nachfolge-Bankleitzahl');
+            $table->integer('blz', false, true)->length(10);
+            $table->string('namelong', 58);
+            $table->string('nameshort', 27);
+            $table->string('zipcode', 5);
+            $table->string('town', 35);
+            $table->tinyInteger('own', false, true)->length(1);
+            $table->tinyInteger('bbk', false, true)->length(1);
+            $table->dateTime('deldate')->nullable();
+            $table->integer('followid', false, true)->length(10);
+            $table->string('bic', 11);
+            $table->string('btxname', 27);
+            $table->char('pzc', 2);
             $table->timestamps();
         });
     }

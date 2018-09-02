@@ -1,5 +1,6 @@
 <?php
 
-Route::get('/gbv/updatedb', function () {
-    return 'Its Working';
+Route::group(['namespace' => 'ProDevelopement\GermanBankVerification\Http\Controllers'], function () {
+    Route::get('/gbv/updatedb', 'AutoPopulateController@index');
+    Route::post('/gbv/updatedb', 'AutoPopulateController@autopopulate');
 });

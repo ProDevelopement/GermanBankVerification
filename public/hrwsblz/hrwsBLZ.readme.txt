@@ -1,0 +1,124 @@
+Class: hrwsBLZ
+created on: August 6th, 2003
+last updated: April 8th, 2018
+Author: Heiko Rettinger (c) by hr-ws.de 2003-2018
+E-Mail: heiko@hr-ws.de
+Filename: hrwsBLZ.readme.txt
+Version: v1.0.23
+
+english description:
+This class can create and handle a database table to insert and query german
+bank identification codes. Now you can also verify account numbers matching a
+given bank identification code. The "Deutsche Bundesbank" provides formatted
+datafiles with all valid German bank identification codes. With this class,
+you can import these files and use it for payment data validation.
+
+The usage of this class is only reasonable in Germany. If you require an english
+documentation please contact me.
+
+Deutsche Beschreibung:
+Mit dieser Klasse lässt sich eine Tabelle mit deutschen Bankleitzahlen erzeugen
+und auch verwalten. Es ist nun auch möglich die Gültigkeit von Kontonummern zu
+einer gegebenen BLZ zu prüfen. Die Deutsche Bundesbank bietet auf ihrer
+Homepage vorformatierte Dateien an, die mit dieser Klasse in die Datenbank
+importiert werden können.
+Es ist möglich, dass diese Datendatei zum Importieren in mehrere Teile
+gesplittet werden muss, da die Datendateien mehr als 3MB umfassen.
+Im Juni 2006 hatte die Deutsche Bundesbank den Aufbau der Datendateien geändert.
+Die aktuellen Versionen respektieren dieses Format. Im Falle eines Upgrades von
+einer älteren Version muss die alte Datenbanktabelle entfernt und mit einer
+neuen ersetzt werden. Dies lässt sich mit der internen Klassenmethode
+blz_droptable() durchführen. Die aktuelle Tabelle kann anschließend mit
+blz_createtable() erzeugt werden.
+In dieser Version sind alle bis April 2018 veröffentlichen Prüfziffer-
+Verfahren implementiert, incl. der modifizierten Methode 45 die ab 4. Juni 2018 gültig ist.
+
+Die Initialisierung:
+Die Klasse erfordert bei der Initialisierung ein Konfigurationsarray
+mit folgenden Feldern:
+(o)	sqlhost :	den MySQL Server Hostnamen (Voreinstellung: "localhost")
+(o)	sqluser :	den MySQL Usernamen (Voreinstellung: "")
+(o)	sqlpass :	das MySQL Passwort (Voreinstellung: "")
+(b)	sqldb :		den MySQL Datenbanknamen (Voreinstellung: "")
+(b)	sqltable :	den MySQL Tabellennamen für die Klasse (Voreinstellung: "hrv_blz")
+(o)	extconnid :	eine MySQL Verbindungskennung, falls diese anstelle einer eigenen
+				Verbindung genutzt werden soll. sqldb & sqltable sind dann trotzdem
+				erforderlich (Voreinstellung: NULL),
+(o)	clearb4import : Importverhalten (true) löscht bei einem Datenimport zuerst den
+					kompletten Tabelleninhalt, (false) behält alle Daten bei
+					(Voreinstellung: true)
+(o) = optional; (b) = wird benötigt
+
+Die Variablen:
+	->_cfg (array)
+Enthält die Klassendeklaration (Felder siehe Konfigurationsarray)
+	->_db (int)
+Enthält die aktuelle MySQL Verbindungskennung
+  ->_corrblz (array)
+Array mit Korrekturen für Prüfzifferberechnungsmethoden einzelner Bankleitzahlen
+	->lasterror (string)
+Enthält den letzten Fehler wenn eine Funktion false zurücklieferte
+	->data (array)
+Enthält alle Bankinformationen, die bei einer Abfrage mit blz_queryblz() oder
+blz_isKtoValid() aus der Datenbank geliefert wurden
+Aufbau: array(
+			lfd Nr. => array([Datenbanksatz]) [,
+			lfd Nr. => array([Datenbanksatz]) [, ... ]]
+			)
+Datenbanksatz:
+	hrz_id			(int) lfd Nr. (von der Bundesbank vergeben)
+	hrz_blz			(int) Bankleitzahl
+	hrz_namelong	(string) Bezeichnung der Kreditinstitutsniederlassung (evtl. verkürzt)
+	hrz_nameshort	(string) Kurzbezeichnung der Kreditinstitutsniederlassung (max. 20 Zeichen)
+	hrz_zipcode		(string) Postleitzahl
+	hrz_town		(string) Ort
+	hrz_own			(int) 1 = eigene Bankleitzahl, 2 = mitgenutzte Bankleitzahl
+	hrz_bbk			(int) 1 = eigenes BBk-Girokonto, 2 = ohne
+	hrz_deldate		(datum) Datum YYYY-MM-TT HH:MM:SS der Löschung, oder 0000-00-00 00:00:00 wenn aktiv
+	hrz_followid	(int) neue lfd Nr. mit der diese Bankleitzahl ersetzt wurde oder 99999 wenn ungültig
+	hrz_bic			(string) BIC ohne DE
+	hrz_btxname		(string) Kurzbezeichnung der Kreditinstitutsniederlassung für Btx und EZÜ (max 27 Zeichen)
+	hrz_pzc			(string) Verfahren zur Prüfsummenberechnung der Kontonummern (2 Zeichen)
+
+Die Funktionen:
+	blz_queryblz($aBLZ)
+Fragt die Datenbank nach einer Bankleitzahl ab.
+Parameter: $aBLZ (int) eine Bankleitzahl
+RETURN-Wert: (int) Anzahl der gefundenen Datensätze, oder (bool) false
+	blz_isIBANvalid($aIBAN)
+Prüft die Gültigkeit einer IBAN anhand der zweistelligen Prüfziffer
+Parameter: $aIBAN (string) Die IBAN Zeichenkette beginnend mit dem Ländercode
+RETURN-Wert: (bool) Gültig oder Ungültig.
+	blz_checkKtoFromIBAN($aIBAN)
+Prüft die Gültigkeit einer deutschen IBAN anhand der erhaltenen Kto & BLZ
+Parameter: $aIBAN (string) Die IBAN Zeichenkette beginnend mit dem Ländercode DE
+RETURN-Wert: (bool) Gültig oder Ungültig.
+	blz_isKtoValid($aKto, [$aBLZ])
+Prüft die Gültigkeit der Kontonummer. Wenn $aBLZ nicht übergeben wird
+setzt dies einen vorangegangenen Aufruf von blz_queryblz() voraus.
+Parameter: $aKto (int) die Kontonummer; $aBLZ (int) optionale BLZ
+RETURN-Wert: (bool) Gültig oder Ungültig.
+	blz_getnumentries()
+Bestimmt die Anzahl der BLZ-Einträge
+Parameter: keine
+RETURN-Wert: (int) Anzahl der Einträge, oder (bool) false
+	blz_importfile($aFilename)
+Importiert die angegebene Datei in die Datenbank
+Parameter: $aFilename (string) Datei mit Pfad auf dem Server
+RETURN-Wert: (bool) true oder false
+	blz_importtext($aText)
+Importiert den angegebenen Text in die Datenbank
+Parameter: $aText (string) Eine Zeichenkette mit dem Format der deutschen Bundesbank
+RETURN-Wert: (bool) true oder false
+
+Interne Funktionen:
+	blz_createtable()
+Kann benutzt werden um die Datentabelle anzulegen
+RETURN-Wert: (bool) true oder false
+	blz_droptable()
+Kann benutzt werden um die Datentabelle vom Server zu löschen
+RETURN-Wert: (bool) true oder false
+	blz_cleartable()
+Kann benutzt werden um die Datentabelle zu leeren
+RETURN-Wert: (bool) true oder false
+

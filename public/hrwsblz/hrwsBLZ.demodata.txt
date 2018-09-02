@@ -1,0 +1,88 @@
+100000001Bundesbank                                                10591Berlin                             BBk Berlin                 20100MARKDEF110009011380U000000000
+100100101Postbank                                                  10916Berlin                             Postbank Berlin            10010PBNKDEFF10024000538U000000000
+100101111SEB                                                       10789Berlin                             SEB Berlin                 25805ESSEDE5F10013005361U000000000
+100102221ABN AMRO Bank Ndl Deutschland                             10105Berlin                             ABN AMRO Bank Berlin       29190ABNADEFFBER10011142U000000000
+100104241Aareal Bank                                               10666Berlin                             Aareal Bank                26910AARBDE5W10009004795U000000000
+100200001Berliner Bank                                             10890Berlin                             Berliner Bank              25140BEBEDEBBXXX69013616U000000000
+100202001BHF-BANK                                                  10117Berlin                             BHF-BANK Berlin            25155BHFBDEFF10060004794U000000000
+100204001Parex Bank Berlin                                         10117Berlin                             Parex Bank Berlin               PARXDEBBXXX09052878U000000000
+100205001Sozialbank                                                10178Berlin                             Sozialbank Berlin          25013BFSWDE33BER09000530U000000000
+100208901Bayer Hypo- und Vereinsbank                               10896Berlin                             HypoVereinsbank Berlin     22014HYVEDEMM48899039785U000000000
+100208902Bayer Hypo- und Vereinsbank                               14532Kleinmachnow                       HypoVereinsbank Kleinmachno22014HYVEDEMM12499049352U000000000
+100208902Bayer Hypo- und Vereinsbank                               14776Brandenburg an der Havel           HypoVereinsbank Brandenburg22014HYVEDEMM16199049746U000000000
+100208902Bayer Hypo- und Vereinsbank                               15517Fürstenwalde /Spree                HypoVereinsbank Fürstenwald22014HYVEDEMM07099050515U000000000
+100208902Bayer Hypo- und Vereinsbank                               15711Königs Wusterhausen                HypoVereinsbank Königs-Wust22014HYVEDEMM10899049747U000000000
+100208902Bayer Hypo- und Vereinsbank                               16515Oranienburg                        HypoVereinsbank Oranienburg22014HYVEDEMM16599049745U000000000
+100222001Landesbank Berlin - ehemals Bankgesellschaft Berlin       10889Berlin                             Landesbank Berlin          29410BELADEBE22269048367U110050000
+100302001Berlin-Hannoversche Hypothekenbank                        10773Berlin                             Berlin Hyp                 26706BHYPDEB1XXX09037413U000000000
+100304001ABK-Kreditbank                                            10789Berlin                             ABK-Kreditbank Berlin      25686ABKBDEB1XXX09044427U000000000
+100305001Bankhaus Löbbecke                                         10117Berlin                             Bankhaus Löbbecke Berlin   26225LOEBDEBBXXX09043961U000000000
+100306001Bankhaus Kruber                                           13469Berlin                             Bankhaus Kruber Berlin     26205GENODEF1OGK88000532U000000000
+100307001Gries & Heissel - Bankiers                                65189Wiesbaden                          Gries & Heissel Wiesbaden  26535DLGHDEB1XXX16044339U000000000
+100400001Commerzbank Berlin (West)                                 10891Berlin                             Commerzbank -West- Berlin  24100COBADEBBXXX13024463U000000000
+100400601Commerzbank Gf 160                                        10891Berlin                             Commerzbank Gf 160 Berlin  24101COBADEFF06009052880U000000000
+100400611Commerzbank Gf 161                                        10891Berlin                             Commerzbank Gf 161 Berlin  24102COBADEFF06109052894U000000000
+100450501Commerzbank Service-BZ                                    10785Berlin                             Commerzbank Service-BZ          COBADEFFBZB13050927U000000000
+100500001Landesbank Berlin - Berliner Sparkasse                    10889Berlin                             Landesbank - Berliner Spk  51000BELADEBEXXXB8002745U000000000
+100500011Landesbank Berlin                                         10889Berlin                             Landesbank Berlin          51001BELADEBE00120046768U000000000
+100500051Landesbank Berlin - E 1 -                                 10889Berlin                             Landesbank Berlin - E 1 -  51005BELADEB1DB5C6047222U000000000
+100500061Landesbank Berlin - E 2 -                                 10889Berlin                             Landesbank Berlin - E 2 -  51006BELADEB1DB609047223U000000000
+100505001LBS Ost Berlin                                            10405Berlin                             LBS Ost Berlin                  LBSODEB1BLN09046141U000000000
+100506001WestLB Berlin                                             10117Berlin                             WestLB Berlin              51099WELADEBBXXX08049322U000000000
+100509991DekaBank Berlin                                           10249Berlin                             DekaBank Berlin                 DGZFDEFFBER09004788U000000000
+100601981Pax-Bank                                                  14005Berlin                             Pax-Bank Berlin                 GENODED1PA606047622U000000000
+100602371Evangelische Darlehnsgenossenschaft                       10503Berlin                             Ev Darlehnsgenossensch Bln      GENODEF1EDB33046278U000000000
+100700001Deutsche Bank Fil Berlin                                  10883Berlin                             Deutsche Bank Fil Berlin   27700DEUTDEBBXXX63004787U000000000
+100700241Deutsche Bank Privat und Geschäftskunden F 700            10883Berlin                             Deutsche Bank PGK Berlin   21700DEUTDEDBBER63049758U000000000
+100701001Deutsche Bank Fil Berlin II                               10883Berlin                             Deutsche Bank Fil Berlin II27701DEUTDEBB10163053102U000000000
+100701241Deutsche Bank Privat und Geschäftskd Berlin II            10883Berlin                             Deutsche Bank PGK Berlin II21701DEUTDEDB10163053103U000000000
+100777771norisbank                                                 60486Frankfurt am Main                  norisbank Frankfurt        21431NORSDE51XXX63053532U000000000
+100800001Dresdner Bank Filiale Berlin I                            10877Berlin                             Dresdner Bank Fil I Berlin 28100DRESDEFF10076024465U000000000
+100800051Dresdner Bank Zw A                                        10623Berlin                             Dresdner Bank Berlin Zw A       DRESDEFFI2676046513U000000000
+100800061Dresdner Bank Zw B                                        10623Berlin                             Dresdner Bank Berlin Zw B       DRESDEF1S0276046514U000000000
+100800551Dresdner Bank Zw 55                                       10623Berlin                             Dresdner Bank Zw 55 Berlin 28101DRESDEFF11276053527M000000000
+100800571Dresdner Bank Gf ZW 57                                    10877Berlin                             Dresdner Bk ZW 57 Berlin   28103DRESDEFF11476053520M000000000
+100800881Dresdner Bank IBLZ                                        10623Berlin                             Dresdner Bank IBLZ Berlin       DRESDEF1S0376044595U000000000
+100800901Dresdner Bank Gf Berlin                                   10877Berlin                             Dresdner Bank Gf Berlin    28102DRESDEFFBB276052007D000000000
+100809001Dresdner Bank Filiale Berlin III                          10877Berlin                             Dresdner Bk Fil III Berlin 28109DRESDEFF19976000534U000000000
+100892601Dresdner Bank ITGK                                        10877Berlin                             Dresdner Bank ITGK Berlin       DRESDEFFI1409050474U000000000
+100899991Dresdner Bank ITGK 2                                      10117Berlin                             Dresdner Bank ITGK 2 Berlin     DRESDEFFI9909052938U000000000
+100900001Berliner Volksbank                                        10892Berlin                             Berliner VB Berlin         91001BEVODEBBXXX06023299U000000000
+100900002Volksbank Potsdam Zndl d Berliner Volksbank               14467Potsdam                            Volksbank Potsdam          91001           06044983U000000000
+100900002Berliner Volksbank                                        14542Werder (Havel)                     Berliner VB Werder         91001           06047007U000000000
+100900002Berliner Volksbank                                        14547Beelitz, Mark                      Berliner Volksbank Beelitz 91001           06045734U000000000
+100900002Berliner Volksbank (eh Grundkreditbank)                   14513Teltow                             Berliner VB Teltow         91001           06050571U000000000
+100900002Berliner Volksbank                                        14929Treuenbrietzen                     Berliner VB Treuenbrietzen 91001           06046045U000000000
+100900002Berliner Volksbank                                        14558Nuthetal                           Berliner Volksbank Saarmund91001           06047443U000000000
+100900002Berliner Volksbank                                        14612Falkensee                          Berliner VB Falkensee      91001           06044918U000000000
+100900002Berliner Volksbank                                        14641Nauen, Havelland                   Berliner VB Nauen          91001           06046770U000000000
+100900002Berliner Volksbank                                        16515Oranienburg                        Berliner VB Oranienburg    91001           06044974U000000000
+100900002Berliner Volksbank                                        16540Hohen Neuendorf                    Berliner VB Hohen Neuendorf91001           06047004U000000000
+100900002Berliner Volksbank                                        16559Liebenwalde                        Berliner VB Liebenwalde    91001           06049697U000000000
+100900002Berliner Volksbank Fil Velten                             16727Velten                             Berliner VB Velten         91001           06047216U000000000
+100900002Berliner Volksbank                                        16727Oberkrämer                         Berliner VB Oberkrämer     91001           06049698U000000000
+100900002Berliner Volksbank                                        16761Hennigsdorf                        Berliner VB Hennigsdorf    91001           06048909U000000000
+100900002Berliner Volksbank                                        16321Bernau bei Berlin                  Berliner VB Bernau         91001           06046058U000000000
+100900002Berliner Volksbank                                        16348Wandlitz                           Berliner Volksbank         91001           06048384U000000000
+100900002Berliner Volksbank                                        15757Halbe                              Berliner VB Halbe          91001           06046047U000000000
+100900002Berliner Volksbank                                        16225Eberswalde                         Berliner VB Eberswalde     91001           06051684U000000000
+100900002Berliner Volksbank                                        16244Schorfheide                        Berliner VB Schorfheide    91001           06049435U000000000
+100900002Berliner Volksbank                                        16247Joachimsthal                       Berliner VB Joachimsthal   91001           06049434U000000000
+100900002Berliner Volksbank                                        16248Hohensaaten                        Berliner VB Hohensaaten    91001           06044914U000000000
+100900002Berliner Volksbank                                        15711Königs Wusterhausen                Berliner VB Königs Wusterhs91001           06044951U000000000
+100900002Berliner Volksbank                                        15732Eichwalde                          Berliner Volksbank         91001           06048382U000000000
+100900002Berliner Volksbank                                        15562Rüdersdorf b Berlin                Berliner Volksbank         91001           06048383U000000000
+100900002Berliner Volksbank                                        14979Großbeeren                         Berliner VB Großbeeren     91001           06044952U000000000
+100900002Berliner Volksbank                                        15344Strausberg                         Berliner VB Strausberg     91001           06045010U000000000
+100900002Berliner Volksbank                                        16766Kremmen                            Berliner VB Kremmen        91001           06047003U000000000
+100900002Berliner Volksbank                                        16775Gransee                            Berliner VB Gransee        91001           06047021U000000000
+100900002Berliner Volksbank                                        16775Löwenberger Land                   Berliner VB Löwenberg      91001           06049392U000000000
+100900002Berliner Volksbank                                        16792Zehdenick                          Berliner VB Zehdenick      91001           06045019U000000000
+100900002Berliner Volksbank                                        16798Fürstenberg /Havel                 Berliner VB Fürstenberg    91001           06049394U000000000
+100900002Berliner Volksbank                                        16816Neuruppin                          Berliner VB Neuruppin      91001           06044970U000000000
+100900002Berliner Volksbank Fil Rheinsberg                         16831Rheinsberg                         Berliner VB Rheinsberg     91001           06046040U000000000
+100900002Berliner Volksbank                                        16835Lindow (Mark)                      Berliner VB Lindow         91001           06049393U000000000
+100900002Berliner Volksbank                                        16866Kyritz, Prignitz                   Berliner VB Kyritz         91001           06047009U000000000
+100900002Berliner Volksbank                                        16909Wittstock, Dosse                   Berliner VB Wittstock      91001           06047010U000000000
+100900002Berliner Volksbank                                        15366Neuenhagen b Berlin                Berliner VB Neuenhagen     91001           06053326U000000000
+100900002Berliner Volksbank                                        16548Glienicke /Nordbahn                Berliner VB Glienicke      91001           06053327U000000000
