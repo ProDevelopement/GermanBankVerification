@@ -1,35 +1,24 @@
 <?php
-/* Class: BLZServer
- * created on: April 8th, 2011
- * last update: April 8th, 2018
- * Author: Heiko Rettinger (c) by hr-ws.de 2011-2018
- * Filename: hrwsBLZ.class5.php
- * Version: v1.0.23
- *
- * German bank identification code server for PHP5
- * query BLZ in database, returns array with bank identification data
- * supports import of Deutsche Bundesbank BLZ datafiles
- * Download datafiles at:
- * http://www.bundesbank.de/Redaktion/EN/Standardartikel/Tasks/Payment_systems/bank_sort_codes_download.html
- * Homepage of Deutsche Bundesbank: http://www.bundesbank.de/
- *
- * This class is freeware and comes with no warranty at all.
- * Please leave the copyright note unchanged.
- */
+namespace ProDevelopement\GermanBankVerification\Classes;
 
 class hrwsBLZ {
 	protected $_cfg = array("sqlhost" => "localhost",		// MySQL Server Hostname
                           "sqluser" => "pb",				// MySQL Username
-                          "sqlpass" => "Pentium1.",			// MySQL Password
-                          "sqldb" => "pkgKtoBlzDev",		// MySQL Database
-                          "sqltable" => "hrv_blz",			// MySQL Databasetable
-                          "extconnid" => NULL,				// an external MySQL connect ID
+                          "sqlpass" => "Pentium1.",				// MySQL Password
+                          "sqldb" => "pkgKtoBlzDev",					// MySQL Database
+                          "sqltable" => "hrv_blz",		// MySQL Databasetable
+                          "extconnid" => NULL,			// an external MySQL connect ID
                            "clearb4import" => true);		// clear Databasetable before importing Datasets
 	protected $_db = NULL;
   protected $_corrblz = array(    // Array to correct blz pz assignment format: (int-BLZ) => 'pz'
     );
 	public $lasterror = ""; 
-	public $data = array();
+    public $data = array();
+    protected $specResponse = array(
+        'status' => false,
+        'alert' => 'danger'
+    );
+
 	// constructor
 	public function __construct($aConfig = NULL) {
 		if (($aConfig !== NULL) && is_array($aConfig))
@@ -47,7 +36,7 @@ class hrwsBLZ {
 	
 	public function blz_checkKtoFromIBAN($aIBAN) {
 		if (substr($aIBAN,0,2)!='DE') {
-			$this->lasterror = "Kto check from IBAN only for Germany possible.";
+			$this->specResponse['msg'] = "Kto check from IBAN only for Germany possible.";
 			return false;
 		}
 		if (!$this->blz_isIBANvalid($aIBAN)) return false; // IBAN invalid
@@ -65,15 +54,15 @@ class hrwsBLZ {
 					while ($row = $res->fetch_array(MYSQLI_ASSOC)) $this->data[$row['hrz_id']] = $row;
 					return count($this->data);
 				} else return 0;
-			} else $this->lasterror = "wrong bank indentification code submitted";
-		} else $this->lasterror = "no bank identification code submitted";
+			} else $this->specResponse['msg'] = "wrong bank indentification code submitted";
+		} else $this->specResponse['msg'] = "no bank identification code submitted";
 		return false;
 	}
-	
+	// PB: Working
 	public function blz_isKtoValid($aKto, $aBLZ = NULL) {
 		if ($aBLZ !== NULL) $this->blz_queryblz($this->blz_cleanblz($aBLZ));
 		if (count($this->data)==0) {
-			$this->lasterror = "no bank identification code present";
+			$this->specResponse['msg'] = "no bank identification code present";
 			return false;
 		}
 		$bank = current($this->data);
@@ -82,15 +71,15 @@ class hrwsBLZ {
     } else $usrfunc = "blz_kt".$bank['hrz_pzc'];
 		if (method_exists($this, $usrfunc))
 			return call_user_func(array($this, $usrfunc), $this->blz_cleankto($aKto));
-		else $this->lasterror = "account number validation method unknown";
+		else $this->specResponse['msg'] = "account number validation method unknown";
 		return false;
-	}
-  
-  public function blz_ValidateKtoByMethod($aKto, $aMethod) {
+    }
+      
+    public function blz_ValidateKtoByMethod($aKto, $aMethod) {
     $usrfunc = "blz_kt".$aMethod;
     if (method_exists($this, $usrfunc)) {
       return call_user_func(array($this, $usrfunc), $this->blz_cleankto($aKto));
-    } else $this->lasterror = "validation method unknown";
+    } else $this->specResponse['msg'] = "validation method unknown";
     return false;
   }
 	
@@ -102,7 +91,7 @@ class hrwsBLZ {
 			if ($res !== false) {
 				list($this->numBLZ) = $res->fetch_array(MYSQLI_NUM);
 				return $this->numBLZ;
-			} else $this->lasterror = "could not retrieve data";
+			} else $this->specResponse['msg'] = "could not retrieve data";
 		}
 		return false;
 	}
@@ -113,11 +102,11 @@ class hrwsBLZ {
 			$fp = fopen($aFilename, "r");
 			if ($fp !== false) {
 				while (!feof($fp)) $this->import[] = fgets($fp);
-			} else $this->lasterror = "couldn't open importfile";
+			} else $this->specResponse['msg'] = "couldn't open importfile";
 			fclose($fp);
 			if (count($this->import) > 0) return $this->blz_importarray();
-			else $this->lasterror = "no entries found";
-		} else $this->lasterror = "importfile doesn't exist";
+			else $this->specResponse['msg'] = "no entries found";
+		} else $this->specResponse['msg'] = "importfile doesn't exist";
 		return false;
 	}
 	
@@ -125,8 +114,8 @@ class hrwsBLZ {
 		if (trim($aText) != "") {
 			$this->import = explode("\n", $aText);
 			if (count($this->import) > 0) return $this->blz_importarray();
-			else $this->lasterror("no entries found");
-		} else $this->lasterror = "no content in text detected";
+			else $this->specResponse['msg']("no entries found");
+		} else $this->specResponse['msg'] = "no content in text detected";
 		return false;
 	}
 	
@@ -136,11 +125,11 @@ class hrwsBLZ {
 			$fp = fopen($aFilename, "r");
 			if ($fp !== false) {
 				while (!feof($fp)) $this->import[] = fgets($fp);
-			} else $this->lasterror = "couldn't open importfile";
+			} else $this->specResponse['msg'] = "couldn't open importfile";
 			fclose($fp);
 			if (count($this->import) > 0) return $this->blz_importupdatearray();
-			else $this->lasterror = "no entries found";
-		} else $this->lasterror = "importfile doesn't exist";
+			else $this->specResponse['msg'] = "no entries found";
+		} else $this->specResponse['msg'] = "importfile doesn't exist";
 		return false;
 	}
 	
@@ -148,8 +137,8 @@ class hrwsBLZ {
 		if (trim($aText) != "") {
 			$this->import = explode("\n", $aText);
 			if (count($this->import) > 0) return $this->blz_importupdatearray();
-			else $this->lasterror("no entries found");
-		} else $this->lasterror = "no content in text detected";
+			else $this->specResponse['msg']("no entries found");
+		} else $this->specResponse['msg'] = "no content in text detected";
 		return false;
 	}
 	
@@ -163,7 +152,7 @@ class hrwsBLZ {
 				if (!$this->blz_cleartable()) return false;
 			}
 			if (!$this->blz_sqlconnect()) return false;
-			$this->lasterror = "";
+			$this->specResponse['msg'] = "";
 			$this->importcount = 0;
 			$this->numBLZ = NULL;
 			foreach ($this->import as $key => $line) {
@@ -188,19 +177,19 @@ class hrwsBLZ {
 						$hrz_bic."', '".$hrz_btxname."', '".$hrz_pzc."')";
 					$res = $this->_db->query($sql);
 					if ($res !== false) $this->importcount++;
-					else $this->lasterror .= "error in line ".($key+1)."<br>";
+					else $this->specResponse['msg'] .= "error in line ".($key+1)."<br>";
 				}
 			}
-			if ($this->lasterror == "") return $this->importcount;
-			else $this->lasterror .= $this->importcount." lines successfully imported";
-		} else $this->lasterror = "no entries found";
+			if ($this->specResponse['msg'] == "") return $this->importcount;
+			else $this->specResponse['msg'] .= $this->importcount." lines successfully imported";
+		} else $this->specResponse['msg'] = "no entries found";
 		return false;
 	}
 	
 	protected function blz_importupdatearray() {
 		if (count($this->import) > 0) {
 			if (!$this->blz_sqlconnect()) return false;
-			$this->lasterror = "";
+			$this->specResponse['msg'] = "";
 			$this->importcount = 0;
 			$this->numBLZ = NULL;
 			foreach ($this->import as $key => $line) {
@@ -233,12 +222,12 @@ class hrwsBLZ {
 					if ($exist != 0) $res = $this->_db->query($sqlu);
 					else $res = $this->_db->query($sqli);
 					if ($res !== false) $this->importcount++;
-					else $this->lasterror .= "error in line ".($key+1)."<br>";
+					else $this->specResponse['msg'] .= "error in line ".($key+1)."<br>";
 				}
 			}
-			if ($this->lasterror == "") return $this->importcount;
-			else $this->lasterror .= $this->importcount." lines successfully imported";
-		} else $this->lasterror = "no entries found";
+			if ($this->specResponse['msg'] == "") return $this->importcount;
+			else $this->specResponse['msg'] .= $this->importcount." lines successfully imported";
+		} else $this->specResponse['msg'] = "no entries found";
 		return false;
 	}
 
@@ -249,8 +238,8 @@ class hrwsBLZ {
 			$this->_db = new mysqli($this->_cfg['sqlhost'], $this->_cfg['sqluser'], $this->_cfg['sqlpass']);
 			if ($this->_db !== false) {
 				if ($this->_db->select_db($this->_cfg['sqldb'])) return true;
-				else $this->lasterror = "unable to access database";
-			} else $this->lasterror = "unable to connect to database";
+				else $this->specResponse['msg'] = "unable to access database";
+			} else $this->specResponse['msg'] = "unable to connect to database";
 		}
 		return false;
 	}
@@ -261,7 +250,7 @@ class hrwsBLZ {
 			$res = $this->_db->query($sql);
 			$this->numBLZ = NULL;
 			if ($res !== false) return true;
-			else $this->lasterror = "error clearing database table";
+			else $this->specResponse['msg'] = "error clearing database table";
 		}
 	}
 	
@@ -277,7 +266,7 @@ class hrwsBLZ {
 					" PRIMARY KEY ( `hrz_id` ) ) ENGINE = MyISAM COMMENT = 'hrwsBLZ - Datatable'";
 			$res = $this->_db->query($sql);
 			if ($res !== false) return true;
-			else $this->lasterror = "error creating database table";
+			else $this->specResponse['msg'] = "error creating database table";
 		}
 		return false;
 	}
@@ -288,7 +277,7 @@ class hrwsBLZ {
 			$res = $this->_db->query($sql);
 			$this->numBLZ = NULL;
 			if ($res !== false) return true;
-			else $this->lasterror = "error dropping database table";
+			else $this->specResponse['msg'] = "error dropping database table";
 		}
 	}
 	
@@ -1252,4 +1241,3 @@ class hrwsBLZ {
 		return $this->blz_kt00($ktonr); // Variant 2: method 00, weight=2,1,2,1,2,1,2,1,2
 	}
 }
-?>

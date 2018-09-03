@@ -63,9 +63,9 @@
 <?php
   $content = "";
 	// configuration array for class:
-	$conf = array("sqluser" => "",					// MySQL Username
-					"sqlpass" => "",				// MySQL Password
-					"sqldb" => "",					// MySQL Database
+	$conf = array("sqluser" => "pb",				// MySQL Username
+					"sqlpass" => "Pentium1.",		// MySQL Password
+					"sqldb" => "pkgKtoBlzDev",		// MySQL Database
 					"sqltable" => "hrv_blz",		// MySQL Databasetable
 					"clearb4import" => false);		// clear Databasetable before importing Datasets
 	include('hrwsBLZ.class5.php');
